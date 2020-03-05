@@ -3,7 +3,8 @@ from onlineTime import TimeHandler
 class TimeContent(object):
     def __init__(self, timeZone = 0):
         self.hour, self.minutes = TimeHandler.updateTime()
-        self.hour += timeZone
+        self.timeZone = timeZone
+        self.hour += self.timeZone
         self._checkTime()
         self._setTimeStr()
     # end of __init__
@@ -30,9 +31,9 @@ class TimeContent(object):
         self.strTime = strHour + ":" + strMinutes
     # end of setTimeStr
 
-    def setTime(self, hour, minutes):
-        self.hour = hour
-        self.minutes = minutes
+    def updateTime(self):
+        self.hour, self.minutes = TimeHandler.updateTime()
+        self.hour += self.timeZone
         self._checkTime()
         self._setTimeStr()
     # end of setTime
